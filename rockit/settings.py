@@ -1,6 +1,6 @@
 import os
 
-from rockit.config.default import *
+from rockit.configs.default import *
 
 """
 Inherit from environment specifics
