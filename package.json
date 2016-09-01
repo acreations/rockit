@@ -1,0 +1,27 @@
+{
+  "name": "rockit",
+  "version": "1.0.0",
+  "description": "Rock it at home with automation",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acreations/rockit.git"
+  },
+  "keywords": [
+    "home",
+    "automation",
+    "automation",
+    "smart",
+    "home"
+  ],
+  "author": "acreations",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acreations/rockit/issues"
+  },
+  "homepage": "https://github.com/acreations/rockit"
+}
