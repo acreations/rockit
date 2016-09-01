@@ -1,5 +1,7 @@
 Django==1.10
+PyInstaller==3.2
 djangorestframework==3.4.6
+ez-setup==0.9
 py==1.4.31
 pytest==3.0.1
 wsgiref==0.1.2
