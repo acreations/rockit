@@ -91,3 +91,6 @@ ENV/
 
 # pyCharm
 .idea
+
+# setuptools
+distribute*
