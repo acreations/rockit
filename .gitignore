@@ -94,3 +94,6 @@ ENV/
 
 # setuptools
 distribute*
+
+# node
+node_modules
