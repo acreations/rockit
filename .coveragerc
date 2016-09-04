@@ -1,0 +1,25 @@
+# .coveragerc to control coverage.py
+
+[run]
+branch = True
+
+omit =
+    manage.py
+    setup.py
+    rockit/jinja2.py
+    rockit/wsgi.py
+    venv/*
+    **configs**
+    **__init__**
+    **migrations**
+    **settings**
+    **test**
+    **urls**
+
+
+[report]
+
+skip_covered = true
+
+[html]
+directory = htmlcov
