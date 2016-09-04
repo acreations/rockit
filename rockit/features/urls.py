@@ -3,11 +3,9 @@ import os
 from django.conf.urls import include, url
 
 from rockit import settings
+from rockit.features import views
 
-# from rockit.features import views
-
-urlpatterns = []
-# urlpatterns = [url(r'^$', views.FeaturesView.as_view(), name="plugins")]
+urlpatterns = [url(r'^$', views.FeaturesView.as_view(), name="features")]
 
 for app in settings.INSTALLED_APPS:
 

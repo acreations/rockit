@@ -11,6 +11,6 @@ class Hello(ModifiedModel):
     Track a hello requests
     """
 
-    name = models.TextField(max_length=100, help_text=_("Name of requestee"))
-    message = models.TextField(max_length=1000, help_text=_("Message of requestee"))
-    identifier = models.UUIDField(primary_key=True, unique=True, editable=False, help_text=_("Identifier of requestee"))
+    name = models.TextField(max_length=100, help_text=_("Please specify a name"))
+    message = models.TextField(max_length=1000, help_text=_("Any hello message?"))
+    identifier = models.UUIDField(primary_key=True, unique=True, help_text=_("Unique identifier (uuid4)"))
