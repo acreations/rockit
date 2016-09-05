@@ -22,8 +22,5 @@ omit =
 
 skip_covered = true
 
-exclude_lines =
-    pragma: no cover
-
 [html]
 directory = htmlcov
