@@ -14,3 +14,4 @@ class Hello(ModifiedModel):
     name = models.TextField(max_length=100, help_text=_("Please specify a name"))
     message = models.TextField(max_length=1000, help_text=_("Any hello message?"))
     identifier = models.UUIDField(primary_key=True, unique=True, help_text=_("Unique identifier (uuid4)"))
+    ignore = models.BooleanField(default=False, help_text=_("Ignore hello request"))
