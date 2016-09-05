@@ -5,6 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
+    "test": "pytest --maxfail=2 --cov . --cov-report=html",
     "dist": "pyinstaller -y --name=rockit manage.py"
   },
   "repository": {

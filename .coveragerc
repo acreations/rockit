@@ -6,6 +6,8 @@ branch = True
 omit =
     manage.py
     setup.py
+    rockit/core/views.py
+    rockit/features/views.py
     rockit/jinja2.py
     rockit/wsgi.py
     venv/*
@@ -16,10 +18,12 @@ omit =
     **test**
     **urls**
 
-
 [report]
 
 skip_covered = true
+
+exclude_lines =
+    pragma: no cover
 
 [html]
 directory = htmlcov
