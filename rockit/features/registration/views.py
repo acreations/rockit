@@ -1,4 +1,3 @@
-from rest_framework import status
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -19,8 +18,6 @@ class RegistrationView(APIView):
 
 
 class HelloViewSet(mixins.CreateModelMixin,
-                   mixins.ListModelMixin,
-                   mixins.RetrieveModelMixin,
                    viewsets.GenericViewSet):
     """
     API endpoint that allows groups to be viewed or edited.

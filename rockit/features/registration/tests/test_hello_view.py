@@ -35,10 +35,8 @@ def test_it_should_not_be_possible_to_create_more_than_one_hello(db, client):
     assert response_one
     assert response_one.status_code is status.HTTP_201_CREATED
     assert response_two
-    assert response_two.status_code is status.HTTP_201_CREATED
-
-    print response_two
+    assert response_two.status_code is not status.HTTP_201_CREATED
 
     hellos = Hello.objects.all()
 
-    assert len(hellos) is 2
+    assert len(hellos) is 1
