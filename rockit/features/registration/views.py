@@ -28,6 +28,3 @@ class HelloViewSet(mixins.CreateModelMixin,
 
     queryset = models.Hello.objects.all()
     serializer_class = serializers.HelloSerializer
-
-
-    def acc
