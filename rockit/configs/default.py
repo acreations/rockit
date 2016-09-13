@@ -154,7 +154,8 @@ STATIC_URL = '/static/'
 
 # Rockit
 # ------------------------------
-
 INSTALLED_APPS += (
     'rockit.features.registration',
+    'rockit.features.node'
 )
+

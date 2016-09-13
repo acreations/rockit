@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 from rockit.core.models import ModifiedModel
 
 
-class Hello(ModifiedModel):
+class Member(ModifiedModel):
     """
     Track a hello requests
     """

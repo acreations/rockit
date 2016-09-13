@@ -30,3 +30,4 @@ class ModifiedModel(CreatedModel):
     class Meta:
         abstract = True
 
+

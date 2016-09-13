@@ -2,7 +2,7 @@ import uuid
 
 from rest_framework import status
 from rest_framework.reverse import reverse
-from rockit.features.registration.models import Hello
+from rockit.features.registration.models import Member
 
 
 def test_it_should_be_able_to_create_hello_request(db, client):
@@ -17,7 +17,7 @@ def test_it_should_be_able_to_create_hello_request(db, client):
     assert response
     assert response.status_code is status.HTTP_201_CREATED
 
-    hellos = Hello.objects.all()
+    hellos = Member.objects.all()
 
     assert len(hellos) is 1
 
@@ -37,6 +37,6 @@ def test_it_should_not_be_possible_to_create_more_than_one_hello(db, client):
     assert response_two
     assert response_two.status_code is not status.HTTP_201_CREATED
 
-    hellos = Hello.objects.all()
+    hellos = Member.objects.all()
 
     assert len(hellos) is 1

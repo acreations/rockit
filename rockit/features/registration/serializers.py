@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from rockit.features.registration.models import Hello
+from rockit.features.registration.models import Member
 
 
 class HelloSerializer(serializers.ModelSerializer):
@@ -9,6 +9,6 @@ class HelloSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = Hello
+        model = Member
         fields = ('name', 'message', 'identifier', 'created')
         read_only_fields = ('created',)

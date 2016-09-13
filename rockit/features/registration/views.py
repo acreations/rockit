@@ -23,5 +23,5 @@ class HelloViewSet(mixins.CreateModelMixin,
     API endpoint that allows groups to be viewed or edited.
     """
 
-    queryset = models.Hello.objects.all()
+    queryset = models.Member.objects.all()
     serializer_class = serializers.HelloSerializer
