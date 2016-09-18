@@ -1,4 +1,6 @@
+from rest_framework import status
 from rest_framework import viewsets, mixins
+from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
@@ -25,3 +27,7 @@ class HelloViewSet(mixins.CreateModelMixin,
 
     queryset = models.Member.objects.all()
     serializer_class = serializers.HelloSerializer
+
+    @detail_route(methods=['post'])
+    def access(self, request, pk=None):
+        return Response("test", status=status.HTTP_400_BAD_REQUEST)
