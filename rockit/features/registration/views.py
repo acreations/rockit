@@ -43,4 +43,10 @@ class HelloViewSet(mixins.CreateModelMixin,
 
     @detail_route(methods=['post'])
     def access(self, request, pk=None):
+
+        serializer = serializers.HelloAccessSerializer(data={
+            'created': self.get_object().created
+        })
+        serializer.is_valid(raise_exception=True)
+
         return Response("test", status=status.HTTP_400_BAD_REQUEST)

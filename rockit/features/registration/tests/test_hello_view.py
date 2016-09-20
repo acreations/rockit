@@ -40,3 +40,23 @@ def test_it_should_not_be_possible_to_create_more_than_one_hello(db, client):
     hellos = Member.objects.all()
 
     assert len(hellos) is 1
+
+
+def test_it_should_poll_for_access_if_hello_is_not_more_than_2_minutes_old(db, client):
+    data = {
+        'name': 'test',
+        'message': 'test message',
+        'identifier': uuid.uuid4()
+    }
+
+    response = client.post(reverse('hello-list'), data)
+
+    assert response
+    assert response.status_code is status.HTTP_201_CREATED
+
+    """
+    Try to poll once
+    """
+    access_response = client.post(response.data['access'])
+
+    assert access_response
