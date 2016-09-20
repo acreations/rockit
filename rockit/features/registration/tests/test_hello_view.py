@@ -39,4 +39,4 @@ def test_it_should_not_be_possible_to_create_more_than_one_hello(db, client):
 
     hellos = Member.objects.all()
 
-    assert len(hellos) is 1
+    assert len(hellos) is 2
