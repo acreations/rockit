@@ -1,7 +1,3 @@
-import uuid
-
-from django.core import exceptions
-from django.http import Http404
 from rest_framework import status
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import detail_route
@@ -34,18 +30,14 @@ class HelloViewSet(mixins.CreateModelMixin,
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
 
-        if 'identifier' in serializer.data:
-            try:
-                self.kwargs['pk'] = serializer.data['identifier']
+        if not serializer.is_valid() and 'identifier' in serializer.errors:
+            self.kwargs['pk'] = serializer.data['identifier']
 
-                hello = self.get_object()
+            serializer = self.get_serializer(self.get_object())
 
-                print hello
-
-            except Http404:
-                pass
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
         return super(HelloViewSet, self).create(request, args, kwargs)
 
