@@ -1,3 +1,6 @@
+from datetime import timedelta
+
+from django.utils import timezone
 from rest_framework import status
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import detail_route
@@ -44,9 +47,27 @@ class HelloViewSet(mixins.CreateModelMixin,
     @detail_route(methods=['post'])
     def access(self, request, pk=None):
 
-        serializer = serializers.HelloAccessSerializer(data={
-            'created': self.get_object().created
-        })
-        serializer.is_valid(raise_exception=True)
+        hello = self.get_object()
 
-        return Response("test", status=status.HTTP_400_BAD_REQUEST)
+        expired = timezone.now() + timedelta(minutes=2)
+
+        if hello.created < expired and hello.is_accepted():
+            d = {'status': 'ACCEPT', 'token': '123' }
+            s = status.HTTP_200_OK
+        else:
+            d = {'status': 'WAITING'}
+            s = status.HTTP_200_OK
+
+        return Response(d, status=s)
+
+    @detail_route(methods=['post'])
+    def accept(self, request, pk):
+        """
+        Accept specific hello request
+        :param request:
+        :param pk:
+        :return:
+        """
+        self.get_object().accept()
+
+        return Response({'status': 'accepted'}, status=status.HTTP_200_OK)

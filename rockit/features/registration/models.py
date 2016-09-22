@@ -11,13 +11,13 @@ class Member(ModifiedModel):
     """
 
     CREATED = 0
-    ACCEPT = 100
+    ACCEPTED = 100
     BLOCKED = 900
 
     STATUS = (
         (CREATED, _('Hello')),
         (BLOCKED, _('Hello request blocked')),
-        (ACCEPT, _('Hello request accepted'))
+        (ACCEPTED, _('Hello request accepted'))
 
     )
 
@@ -25,3 +25,12 @@ class Member(ModifiedModel):
     message = models.TextField(max_length=1000, help_text=_("Any hello message?"))
     identifier = models.UUIDField(primary_key=True, unique=True, help_text=_("Unique identifier (uuid4)"))
     status = models.IntegerField(choices=STATUS, help_text=_("Hello request status"), default=CREATED)
+
+    def accept(self):
+        self.status = Member.ACCEPTED
+        self.save()
+
+        return self
+
+    def is_accepted(self):
+        return self.status is Member.ACCEPTED
