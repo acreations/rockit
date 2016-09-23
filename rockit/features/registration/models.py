@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 from rockit.core.models import ModifiedModel
 
 
-class Member(ModifiedModel):
+class Mingle(ModifiedModel):
     """
     Track a hello requests
     """
@@ -27,19 +27,19 @@ class Member(ModifiedModel):
     status = models.IntegerField(choices=STATUS, help_text=_("Hello request status"), default=CREATED)
 
     def accept(self):
-        self.status = Member.ACCEPTED
+        self.status = Mingle.ACCEPTED
         self.save()
 
         return self
 
     def block(self):
-        self.status = Member.BLOCKED
+        self.status = Mingle.BLOCKED
         self.save()
 
         return self
 
     def is_accepted(self):
-        return self.status == Member.ACCEPTED
+        return self.status == Mingle.ACCEPTED
 
     def is_blocked(self):
-        return self.status == Member.BLOCKED
+        return self.status == Mingle.BLOCKED

@@ -28,7 +28,7 @@ class HelloViewSet(mixins.CreateModelMixin,
     API endpoint that allows groups to be viewed or edited.
     """
 
-    queryset = models.Member.objects.all()
+    queryset = models.Mingle.objects.all()
     serializer_class = serializers.HelloSerializer
 
     def create(self, request, *args, **kwargs):

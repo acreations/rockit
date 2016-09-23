@@ -4,7 +4,7 @@ from datetime import timedelta
 
 from django.urls import reverse
 from rest_framework import status
-from rockit.features.registration.models import Member
+from rockit.features.registration.models import Mingle
 
 
 def test_it_should_poll_for_access_if_hello_is_not_more_than_2_minutes_old(db, client):
@@ -31,7 +31,7 @@ def test_it_should_poll_for_access_if_hello_is_not_more_than_2_minutes_old(db, c
     """
     Simulate an accept
     """
-    Member.objects.all()[0].accept()
+    Mingle.objects.all()[0].accept()
 
     access_response = client.post(response.data['access'])
 
@@ -64,7 +64,7 @@ def test_it_should_return_error_if_hello_request_is_blocked(db, client):
     """
     Simulate block
     """
-    Member.objects.all()[0].block()
+    Mingle.objects.all()[0].block()
 
     access_response = client.post(response.data['access'])
 
@@ -97,7 +97,7 @@ def test_it_should_return_404_if_request_is_expired(db, client):
     """
     Simulate block
     """
-    hello = Member.objects.all()[0]
+    hello = Mingle.objects.all()[0]
     hello.created = hello.created + timedelta(minutes=2, seconds=1)
     hello.save()
 
