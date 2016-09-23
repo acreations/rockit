@@ -51,7 +51,10 @@ class HelloViewSet(mixins.CreateModelMixin,
 
         expired = timezone.now() + timedelta(minutes=2)
 
-        if hello.created < expired and hello.is_accepted():
+        if hello.is_blocked():
+            d = {'status': 'BLOCKED'}
+            s = status.HTTP_400_BAD_REQUEST
+        elif hello.created < expired and hello.is_accepted():
             d = {'status': 'ACCEPT', 'token': '123' }
             s = status.HTTP_200_OK
         else:
@@ -61,7 +64,7 @@ class HelloViewSet(mixins.CreateModelMixin,
         return Response(d, status=s)
 
     @detail_route(methods=['post'])
-    def accept(self, request, pk):
+    def accept(self, request, pk=None):
         """
         Accept specific hello request
         :param request:

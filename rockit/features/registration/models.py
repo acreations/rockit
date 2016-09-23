@@ -32,5 +32,14 @@ class Member(ModifiedModel):
 
         return self
 
+    def block(self):
+        self.status = Member.BLOCKED
+        self.save()
+
+        return self
+
     def is_accepted(self):
-        return self.status is Member.ACCEPTED
+        return self.status == Member.ACCEPTED
+
+    def is_blocked(self):
+        return self.status == Member.BLOCKED
