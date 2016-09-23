@@ -45,6 +45,7 @@ def test_it_should_poll_for_access_if_hello_is_not_more_than_2_minutes_old(db, c
     assert refresh_response
     assert refresh_response.status_code is status.HTTP_200_OK
 
+
 def test_it_should_return_error_if_hello_request_is_blocked(db, client):
     data = {
         'name': 'test',
