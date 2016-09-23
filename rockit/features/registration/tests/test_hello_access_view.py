@@ -38,6 +38,8 @@ def test_it_should_poll_for_access_if_hello_is_not_more_than_2_minutes_old(db, c
     assert access_response
     assert access_response.status_code is status.HTTP_200_OK
     assert access_response.data['status'] == "ACCEPT"
+    assert access_response.data['token']
+    assert access_response.data['refresh']
 
 
 def test_it_should_return_error_if_hello_request_is_blocked(db, client):
@@ -95,7 +97,7 @@ def test_it_should_return_404_if_request_is_expired(db, client):
     assert access_response.data['status'] == "WAITING"
 
     """
-    Simulate block
+    Simulate expired
     """
     hello = Mingle.objects.all()[0]
     hello.created = hello.created + timedelta(minutes=2, seconds=1)

@@ -58,7 +58,7 @@ class HelloViewSet(mixins.CreateModelMixin,
             d = {'status': 'EXPIRED'}
             s = status.HTTP_404_NOT_FOUND
         elif hello.is_accepted():
-            d = {'status': 'ACCEPT', 'token': '123' }
+            d = {'status': 'ACCEPT', 'token': '123', 'refresh': reverse('api-token-refresh') }
             s = status.HTTP_200_OK
         else:
             d = {'status': 'WAITING'}
