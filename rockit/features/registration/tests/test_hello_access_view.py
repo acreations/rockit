@@ -1,5 +1,4 @@
 import uuid
-
 from datetime import timedelta
 
 from django.urls import reverse
@@ -41,6 +40,10 @@ def test_it_should_poll_for_access_if_hello_is_not_more_than_2_minutes_old(db, c
     assert access_response.data['token']
     assert access_response.data['refresh']
 
+    refresh_response = client.post(access_response.data['refresh'], data={'token': access_response.data['token']})
+
+    assert refresh_response
+    assert refresh_response.status_code is status.HTTP_200_OK
 
 def test_it_should_return_error_if_hello_request_is_blocked(db, client):
     data = {

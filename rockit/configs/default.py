@@ -139,6 +139,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination'
 }
 
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -160,7 +164,7 @@ STATIC_URL = '/static/'
 # Rockit
 # ------------------------------
 INSTALLED_APPS += (
+    'rockit.core',
     'rockit.features.registration',
     'rockit.features.node'
 )
-

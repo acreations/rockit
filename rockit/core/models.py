@@ -1,4 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
@@ -31,3 +34,25 @@ class ModifiedModel(CreatedModel):
         abstract = True
 
 
+class UserProfile(ModifiedModel):
+    """
+    Create a customized profile that integrates with django user
+    """
+
+    user = models.OneToOneField(User, related_name='profile', editable=False)
+    name = models.TextField(max_length=100, help_text=_("Name of the plugin"))
+    uuid = models.TextField(editable=False, help_text=_("Unique identifier of user"))
+
+
+@receiver(post_save, sender=User, dispatch_uid="user-create-profile")
+def create_user_profile(sender, instance, created, **kwargs):
+    """
+    Callback for creating a partner if user profile is created
+    :param sender:
+    :param instance:
+    :param created:
+    :param kwargs:
+    :return:
+    """
+    if created:
+        UserProfile.objects.create(user=instance, uuid=instance.username)

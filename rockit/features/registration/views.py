@@ -1,3 +1,4 @@
+import uuid
 from datetime import timedelta
 
 from django.utils import timezone
@@ -7,6 +8,8 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
+from rest_framework_jwt.utils import jwt_payload_handler, jwt_encode_handler
+from rockit.core import utils
 from rockit.features.registration import models
 from rockit.features.registration import serializers
 
@@ -58,7 +61,13 @@ class HelloViewSet(mixins.CreateModelMixin,
             d = {'status': 'EXPIRED'}
             s = status.HTTP_404_NOT_FOUND
         elif hello.is_accepted():
-            d = {'status': 'ACCEPT', 'token': '123', 'refresh': reverse('api-token-refresh') }
+
+            user = utils.create_user(hello.identifier, hello.name)
+
+            payload = jwt_payload_handler(user)
+            token = jwt_encode_handler(payload)
+
+            d = {'status': 'ACCEPT', 'token': token, 'refresh': reverse('api-token-refresh')}
             s = status.HTTP_200_OK
         else:
             d = {'status': 'WAITING'}
